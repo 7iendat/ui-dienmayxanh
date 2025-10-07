@@ -1,10 +1,6 @@
 @import "tailwindcss";
 
-*, html :root{
-  box-sizing: border-box; /* Ensures consistent box model */
-      margin: 0;
-      padding: 0;
-}
+
 
 :root {
   --background: #ffffff;
