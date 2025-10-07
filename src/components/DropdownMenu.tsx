@@ -1,22 +1,43 @@
+"use client";
+
 import { categories } from "@/data/data-fake";
-import React from "react";
+import Image from "next/image";
+import React, { useState } from "react";
 
 const DropdownMenu = () => {
+  const [active, setActive] = useState(0);
   return (
-    <div className="w-xl bg-white absolute top-[calc(100%+14px)] left-0 rounded-md shadow-md text-gray-600 px-6 py-4">
-      <div className="grid grid-cols-3 gap-6">
-        {categories?.map((c) => (
-          <div className="gap-2">
-            <h2 className="font-bold text-sm hover:text-[#0772eb] hover:cursor-pointer">
-              {c.name}
-            </h2>
-            <ul>
-              {c.subcategories.map((subc) => (
-                <li className="hover:cursor-pointer ml-2 text-gray-500 hover:text-gray-600">
-                  {subc.name}
-                </li>
-              ))}
-            </ul>
+    <div className="w-xl bg-white absolute top-[calc(100%+14px)] left-0 rounded-md shadow-md text-gray-600 px-6 py-4 flex">
+      <div className="w-48 border-r bg-gray-50">
+        {categories.map((cat, idx) => (
+          <div
+            key={idx}
+            onMouseEnter={() => setActive(idx)}
+            className={`px-4 py-2 cursor-pointer text-sm hover:bg-blue-100 ${
+              active === idx ? "bg-blue-100 text-blue-600 font-medium" : ""
+            }`}
+          >
+            {cat.name}
+          </div>
+        ))}
+      </div>
+
+      <div className="  p-4 grid grid-cols-[repeat(3,90px)] gap-3">
+        {categories[active!]?.subcategories.map((item, i) => (
+          <div
+            key={i}
+            className="flex flex-col items-center justify-center  gap-1 py-2 px-2 rounded-md hover:bg-blue-50 cursor-pointer transition-colors duration-150"
+          >
+            <img
+              src="https://cdnv2.tgdd.vn/mwg-static/common/Common/0a/b9/0ab938f5b5b2993d568351bceb721407.png"
+              width={40}
+              height={40}
+              alt="Image"
+              className="object-contain"
+            />
+            <span className="text-sm text-gray-700 text-center truncate">
+              {item.name}
+            </span>
           </div>
         ))}
       </div>
