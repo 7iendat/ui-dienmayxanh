@@ -1,9 +1,11 @@
-import Header from "@/components/layout/Header";
+import Banner from "@/components/Banner";
+import CategoryMenu from "@/components/CategoryMenu";
 
 export default function Home() {
   return (
     <>
-      <Header />
+      <Banner />
+      <CategoryMenu />
     </>
   );
 }
