@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import CopyrightSesion from "@/components/CopyrightSesion";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,10 +37,13 @@ export default function RootLayout({
 
         {/* Main Content */}
         <main className="w-full flex justify-center">
-          <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-            {children}
-          </div>
+          <div className="w-full md:max-w-7xl sm:px-6 lg:px-8">{children}</div>
         </main>
+
+        <footer className="w-full flex flex-col">
+          <Footer />
+          <CopyrightSesion />
+        </footer>
       </body>
     </html>
   );

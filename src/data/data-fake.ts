@@ -510,3 +510,26 @@ export const products = [
       "https://cdnv2.tgdd.vn/mwg-static/dmx/Banner/94/8b/948b7caac789363cc09897f49055a698.png",
   },
 ];
+
+export const fakePopularSearches = [
+  { id: 1, name: "Tivi Samsung 4K" },
+  { id: 2, name: "Tủ lạnh Inverter" },
+  { id: 3, name: "Máy lạnh Daikin 1HP" },
+  { id: 4, name: "Nồi chiên không dầu Philips" },
+  { id: 5, name: "Máy lọc không khí Sharp" },
+  { id: 6, name: "Quạt điều hòa Sunhouse" },
+  { id: 7, name: "Điện thoại iPhone 15" },
+  { id: 8, name: "Máy giặt LG Inverter" },
+  { id: 9, name: "Máy sấy tóc Panasonic" },
+  { id: 10, name: "Lò vi sóng Sharp 20L" },
+  { id: 11, name: "Máy hút bụi Samsung" },
+  { id: 12, name: "Bếp từ đôi Midea" },
+  { id: 13, name: "Nồi cơm điện Toshiba" },
+  { id: 14, name: "Tivi LG OLED" },
+  { id: 15, name: "Máy xay sinh tố Philips" },
+  { id: 16, name: "Máy lọc nước RO Karofi" },
+  { id: 17, name: "Tủ đông Sanaky 250L" },
+  { id: 18, name: "Loa Bluetooth Sony" },
+  { id: 19, name: "Bình nước nóng Ariston" },
+  { id: 20, name: "Máy ép trái cây Panasonic" },
+];

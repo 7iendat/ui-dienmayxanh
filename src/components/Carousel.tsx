@@ -23,7 +23,7 @@ const Carousel = () => {
           {products.map((item) => (
             <div
               key={item.id}
-              className="min-w-[585px] flex-shrink-0 p-2 hover:shadow-md transition-all duration-200 rounded-lg cursor-pointer"
+              className="min-w-[80%] sm:min-w-[45%]  md:min-w-[30%] ld:min-w-[23%] flex-shrink-0 p-2 hover:shadow-md transition-all duration-200 rounded-lg cursor-pointer"
             >
               <div className="bg-gray-100 rounded-lg overflow-hidden">
                 <img

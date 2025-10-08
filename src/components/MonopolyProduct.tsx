@@ -16,12 +16,12 @@ const MonopolyProduct = () => {
     emblaApi && emblaApi.scrollNext();
   }, [emblaApi]);
   return (
-    <section className="mt-6 bg-white rounded-xl shadow-sm p-4 w-full  flex-wrap  ">
+    <section className="mt-6 bg-white md:rounded-xl shadow-sm p-4 w-full  flex-wrap  ">
       <h3 className="text-[#1d2939] mb-[20px] text-[24px] font-bold">
         Sản Phẩm Đặc Quyền
       </h3>
 
-      <div className="w-full flex items-center h-full">
+      <div className="w-full block md:flex items-center h-full">
         <Link
           href={"https://www.dienmayxanh.com/chuong-trinh-hang-dac-quyen"}
           className="w-[380px] mr-[10px] "
@@ -33,7 +33,7 @@ const MonopolyProduct = () => {
           />
         </Link>
 
-        <div className="max-w-[calc(100%-390px)] h-auto relative">
+        <div className="w-full md:max-w-[calc(100%-390px)] h-auto relative">
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {fakeProducts.slice(0, 6).map((product) => (

@@ -4,7 +4,7 @@ import React from "react";
 
 const RecommendedSection = () => {
   return (
-    <section className="mt-6 bg-white rounded-xl shadow-sm p-4 w-full">
+    <section className="md:p-4 mt-6 bg-white rounded-xl shadow-sm  w-full">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-xl font-bold text-gray-800">Gợi ý cho bạn</h2>
         <a
@@ -15,7 +15,7 @@ const RecommendedSection = () => {
         </a>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-[10px] w-full px-5 pb-[15px]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-[8px] md:gap-[10px] w-full md:px-5 px-2.5 pb-[15px]">
         {fakeProducts.slice(0, 12).map((product) => (
           <div
             key={product.id}
