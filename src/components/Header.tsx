@@ -72,7 +72,7 @@ const HeaderMenu = () => {
   return (
     <div className="w-full bg-[#eaecf0] h-8 ">
       <div className="w-[80%] h-full flex items-center justify-between mx-auto ">
-        {fakeMenuData.map((d) => (
+        {fakeMenuData.slice(0, 15).map((d) => (
           <Link href={d.path} className="text-sm text-[#0567da]">
             {d.name}
           </Link>
