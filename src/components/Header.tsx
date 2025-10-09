@@ -38,21 +38,67 @@ const Header = () => {
 const HeaderTop = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
   return (
     <header className="w-full bg-[#2a83e9] text-white">
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4">
+      <div className="md:hidden p-2 space-y-2">
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2"
-          >
-            <Menu className="h-6 w-6" />
-          </button>
+          <Link href="/" className="flex-shrink-0">
+            <div className="bg-yellow-400 rounded-full p-1">
+              <img
+                src="./logo.png"
+                alt="logo"
+                className="h-8 w-8 object-contain"
+              />
+            </div>
+          </Link>
 
-          <Link href="/" className="flex items-center">
-            <img src="./logo.png" alt="logo" className="h-8 md:h-10 w-auto" />
+          <div className="flex-grow bg-[#5194e8] rounded-full h-9 flex items-center px-3 text-xs cursor-pointer">
+            <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
+            <span className="truncate">Hồ Chí Minh</span>
+            <ChevronRight className="h-4 w-4 ml-auto flex-shrink-0" />
+          </div>
+
+          <Link
+            href="/"
+            className="flex-shrink-0 bg-[#5194e8] rounded-full h-9 flex items-center px-3 text-xs"
+          >
+            <User className="h-4 w-4 mr-1" />
+            <span>Đăng nhập</span>
           </Link>
         </div>
 
-        <div className="hidden md:flex items-center gap-4 h-[60px]">
+        <div className="bg-white rounded-full h-11 flex items-center p-1">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="flex flex-col items-center justify-center text-[#2a83e9] w-16"
+          >
+            <Menu className="h-5 w-5" />
+            <span className="text-[10px] font-semibold">MENU</span>
+          </button>
+
+          <div className="w-[1px] h-6 bg-gray-200" />
+
+          <form className="relative flex-grow flex items-center h-full px-2">
+            <Search className="absolute left-3 w-5 h-5 text-gray-400 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="Tìm kiếm sản phẩm..."
+              className="pl-7 w-full h-full text-sm text-black outline-none bg-transparent"
+            />
+          </form>
+
+          <Link href="/" className="p-2 text-gray-600">
+            <ShoppingCart className="h-6 w-6" />
+          </Link>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto hidden md:flex items-center justify-between h-16 px-4">
+        <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center">
+            <img src="./logo.png" alt="logo" className="h-10 w-auto" />
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-4 h-[60px]">
           <CategoryMenu />
 
           <form className="relative flex items-center w-[300px] h-[40px] rounded-3xl bg-white shadow-sm overflow-hidden">
@@ -64,28 +110,20 @@ const HeaderTop = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
             />
           </form>
 
-          <div className="">
-            <Link
-              href={"/"}
-              className="px-[5px] mx-2.5 rounded-4xl text-sm flex items-center hover:bg-[#2871d5] h-[42px]"
-            >
-              <User className="h-5 w-5 mr-2" /> Đăng nhập
-            </Link>
-          </div>
-          <div className="flex items-center gap-2 md:gap-4">
-            <button className="p-2 md:hidden">
-              <Search className="h-6 w-6 text-white" />
-            </button>
+          <Link
+            href={"/"}
+            className="px-[5px] mx-2.5 rounded-4xl text-sm flex items-center hover:bg-[#2871d5] h-[42px]"
+          >
+            <User className="h-5 w-5 mr-2" /> Đăng nhập
+          </Link>
 
-            <Link
-              href={"/"}
-              className="px-[5px] rounded-4xl text-sm flex items-center hover:bg-[#2871d5] h-[42px] leading-[42px]"
-            >
-              <ShoppingCart className="h-5 w-5 md:mr-2" />
-
-              <span className="hidden md:inline">Giỏ hàng</span>
-            </Link>
-          </div>
+          <Link
+            href={"/"}
+            className="px-[5px] rounded-4xl text-sm flex items-center hover:bg-[#2871d5] h-[42px] leading-[42px]"
+          >
+            <ShoppingCart className="h-5 w-5 md:mr-2" />
+            <span className="hidden md:inline">Giỏ hàng</span>
+          </Link>
 
           <div className="w-[266px] bg-[#5194e8] rounded-3xl h-[42px] inline-flex justify-between items-center px-4 hover:bg-[#2871d5] cursor-pointer">
             <div className="inline-flex items-center gap-2">

@@ -7,7 +7,7 @@ const ProductCard = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="relative bg-white rounded-[8px] border-[1px] border-[#f2f4f7] md:border-[#eaecf0] hover:shadow-lg hover:cursor-pointer transition p-[10px] flex flex-col  text-center "
+      className="relative bg-white rounded-[8px] border-[1px] border-[#f2f4f7] md:border-[#eaecf0] hover:shadow-lg hover:cursor-pointer transition p-[10px] flex flex-col text-center flex-shrink-0 basis-2/5 md:basis-1/4 lg:basis-1/5"
       onClick={() => router.push(`/${product.category}/${product.id}`)}
     >
       <div className="w-full h-10">

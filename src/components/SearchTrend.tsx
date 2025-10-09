@@ -9,8 +9,8 @@ const SearchTrend = () => {
         <p className="text-[18px] md:text-2xl  font-bold text-[#1d2939]">
           Mọi người cũng tìm kiếm
         </p>
-        <div className="mt-3 overflow-x-auto md:overflow-visible">
-          <div className="flex space-x-2 md:flex-wrap md:space-x-0 md:space-y-2 whitespace-nowrap scrollbar-hide">
+        <div className="mt-3 overflow-x-auto scrollbar-hide">
+          <div className="grid grid-rows-3 grid-flow-col gap-2 md:flex md:flex-wrap">
             {fakePopularSearches.map((ps, index) => (
               <Link
                 key={index}

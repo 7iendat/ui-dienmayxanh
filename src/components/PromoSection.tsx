@@ -35,10 +35,8 @@ export default function PromoSection() {
 
   if (cateError) return <p>Error</p>;
 
-  // console.log("product => ", products);
-
   return (
-    <section className="w-full  md:pt-5 mb-5 md:px-2 ">
+    <section className="w-full pt-4 pl-3 pb-2.5 pr-2.5  md:pt-5 mb-5 md:px-2 ">
       <h3 className=" text-[18px] md:text-2xl font-bold text-[#1d2939]  pl-[12px] pr-2.5 pb-2.5 md:mb-5 leading-tight md:leading-[32px]">
         Khuyến mãi Online
       </h3>
