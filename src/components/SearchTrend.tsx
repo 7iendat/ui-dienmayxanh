@@ -4,9 +4,9 @@ import React from "react";
 
 const SearchTrend = () => {
   return (
-    <section className="w-full bg-white my-2.5  rounded-[8px] p-5 mt-5">
+    <section className="w-full bg-white my-2.5  rounded-[8px] px-2.5 py-[15px] md:p-5 mt-5">
       <div className="w-full">
-        <p className="text-2xl font-bold text-[#1d2939]">
+        <p className="text-[18px] md:text-2xl  font-bold text-[#1d2939]">
           Mọi người cũng tìm kiếm
         </p>
         <div className="mt-3 overflow-x-auto md:overflow-visible">

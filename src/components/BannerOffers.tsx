@@ -11,7 +11,7 @@ const linkArr = [
 const BannerOffers = () => {
   return (
     <section className="w-full my-5">
-      <div className="text-[#1d2939] text-[24px] leading-8 font-bold mb-5">
+      <div className="text-[#1d2939] text-[18px] md:text-[24px] leading-8 font-bold mx-2.5 my-2.5 md:mb-5">
         Gian hàng ưu đãi
       </div>
       {/* Desktop */}

@@ -1,41 +1,115 @@
+"use client";
+
+import { getAllCategory } from "@/api/categoryApi";
 import { fakeMenuData } from "@/data/data-fake";
+import { useQuery } from "@tanstack/react-query";
+import useEmblaCarousel from "embla-carousel-react"; // Import hook
+import Link from "next/link";
 import React from "react";
 
 const Categories = () => {
-  return (
-    <div className="w-full h-auto bg-white mt-4 grid sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-2 rounded-[8px] shadow overflow-hidden">
-      {fakeMenuData.slice(0, 15).map((cate, index) => (
-        <div
-          key={index}
-          className=" relative flex flex-col items-center justify-center hover:bg-[#eaecf0] hover:cursor-pointer transition p-2"
-        >
-          {cate.isHot && (
-            <span className="absolute top-1 right-1 bg-red-500 text-white text-[10px] font-semibold px-2 py-[2px] rounded-full shadow">
-              Giá Sốc
-            </span>
-          )}
-          <img
-            src={cate.image}
-            alt={cate.name}
-            className="w-[47px] h-[47px] object-contain bg-transparent"
-          />
-          <span className="text-center text-sm leading-[18px] my-[2px] mx-auto">
-            {cate.name}
-          </span>
-        </div>
-      ))}
+  const [emblaRef] = useEmblaCarousel({
+    align: "start",
+    dragFree: true,
+  });
 
-      {fakeMenuData.length > 16 && (
-        <div className="flex flex-col items-center justify-center hover:bg-gray-400/40 hover:cursor-pointer transition p-2">
-          <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center">
-            <span className="text-lg font-bold text-gray-700">+</span>
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getAllCategory,
+  });
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error...</p>;
+
+  return (
+    <>
+      <div className="hidden md:grid w-full h-auto bg-white mb-5 mt-4 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-8 gap-2 rounded-[8px] shadow overflow-hidden">
+        {data?.slice(0, 15).map((cate, index) => (
+          <CategoryItem key={index} cate={cate} />
+        ))}
+
+        {fakeMenuData.length > 15 && (
+          <Link
+            href={"/"}
+            className="flex flex-col items-center justify-center hover:bg-gray-100 hover:cursor-pointer transition p-2"
+          >
+            <img
+              src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/9c/c7/9cc7b36387641fc1bdde6bb3909e4b07.png"
+              alt="image"
+              className="w-[47px] h-[47px]"
+            />
+            <span className="text-center text-sm font-medium my-[2px]">
+              Tất cả
+            </span>
+          </Link>
+        )}
+      </div>
+
+      <div className="block md:hidden mt-4 bg-white p-2 rounded-lg shadow">
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {fakeMenuData.map((cate, index) => (
+              <div
+                key={index}
+                className="relative basis-1/5 flex-shrink-0 flex justify-center"
+              >
+                <CategoryItem cate={cate} isMobile />
+              </div>
+            ))}
+
+            <div className="relative basis-1/5 flex-shrink-0 flex justify-center">
+              <Link
+                href={"/"}
+                className="w-full flex flex-col items-center justify-start text-center p-1"
+              >
+                <div className="w-[47px] h-[47px] flex items-center justify-center bg-gray-100 rounded-full mb-1">
+                  <img
+                    src="https://cdnv2.tgdd.vn/mwg-static/dmx/Common/9c/c7/9cc7b36387641fc1bdde6bb3909e4b07.png"
+                    alt="image"
+                    className="w-6 h-6"
+                  />
+                </div>
+                <span className="text-center text-xs leading-tight my-[2px] mx-auto">
+                  Xem thêm
+                </span>
+              </Link>
+            </div>
           </div>
-          <span className="text-center text-sm font-medium text-blue-600">
-            Xem thêm
-          </span>
         </div>
+      </div>
+    </>
+  );
+};
+
+const CategoryItem = ({ cate, isMobile = false }) => {
+  const isHot = true;
+  return (
+    <Link
+      href={`/${cate.slug}`}
+      className={`relative w-full flex flex-col items-center justify-start hover:bg-gray-100 hover:cursor-pointer transition rounded-lg ${
+        isMobile ? "p-1" : "px-2.5 py-4"
+      }`}
+    >
+      {isHot && !isMobile && (
+        <span className="absolute top-2 right-[25px] bg-[#ffced2] text-[#dd2f2c] text-[12px] px-[3px] rounded-[5px] shadow">
+          3.990k
+        </span>
       )}
-    </div>
+      <img
+        src={
+          "https://cdnv2.tgdd.vn/mwg-static/dmx/Common/04/2e/042e6d1427540a418b516a9576e79b20.png"
+        }
+        alt={cate.name}
+        className="w-[47px] h-[47px] object-contain bg-transparent mb-1"
+      />
+      <span
+        className={`text-center leading-tight my-[2px] mx-auto ${
+          isMobile ? "text-xs" : "text-sm"
+        }`}
+      >
+        {cate.name}
+      </span>
+    </Link>
   );
 };
 

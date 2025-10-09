@@ -9,15 +9,15 @@ const CategoryMenu = () => {
 
   return (
     <div
-      className="relative"
+      className="relative h-full"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
       <div
-        className="h-full flex items-center cursor-pointer w-auto hover:text-[#dee8f3]"
+        className="h-full flex items-center cursor-pointer w-auto "
         style={{ marginRight: 12 }}
       >
-        <Menu className="h-4 w-4 mr-2" />
+        <Menu className="h-5 w-5 mr-2" />
         <span>Danh mục</span>
       </div>
 

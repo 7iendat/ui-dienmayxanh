@@ -1,104 +1,121 @@
 "use client";
-import { categories, categories1, fakeProducts } from "@/data/data-fake";
-import { Dot, Star } from "lucide-react";
-import React, { useState } from "react";
+import { getAllCategory, getProductByCategories } from "@/api/categoryApi";
+import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export default function PromoSection() {
-  const [activeCate, setActiveCate] = useState("Tất cả");
+  const [activeCate, setActiveCate] = useState("");
+  const router = useRouter();
 
-  const filteredProducts =
-    activeCate === "Tất cả"
-      ? fakeProducts
-      : fakeProducts.filter((p) => p.category === activeCate);
+  const {
+    data: categories,
+    isLoading: cateLoading,
+    isError: cateError,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getAllCategory,
+  });
+
+  const {
+    data: products,
+    isLoading: proLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["products", activeCate],
+    queryFn: () => getProductByCategories(activeCate),
+    enabled: !!activeCate,
+  });
+
+  useEffect(() => {
+    if (categories && categories.length > 0 && !activeCate) {
+      setActiveCate(categories[0].slug);
+    }
+  }, [categories, activeCate]);
+
+  if (cateError) return <p>Error</p>;
+
+  // console.log("product => ", products);
 
   return (
-    <section className="w-full bg-white rounded-2xl shadow p-4 mt-6 mb-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-[#0056a6]">
-          🎉 Khuyến mãi Online
-        </h2>
-        <button
-          className="text-sm text-[#0056a6] hover:underline hover:cursor-pointer"
-          onClick={() => setActiveCate("Tất cả")}
-        >
-          Xem tất cả
-        </button>
-      </div>
+    <section className="w-full  md:pt-5 mb-5 md:px-2 ">
+      <h3 className=" text-[18px] md:text-2xl font-bold text-[#1d2939]  pl-[12px] pr-2.5 pb-2.5 md:mb-5 leading-tight md:leading-[32px]">
+        Khuyến mãi Online
+      </h3>
 
-      <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 mb-3 ">
-        {categories1.map((cate) => (
-          <button
-            key={cate}
-            onClick={() => setActiveCate(cate)}
-            className={`hover:cursor-pointer flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium border transition ${
-              activeCate === cate
-                ? "bg-[#0056a6] text-white border-[#0056a6]"
-                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-            }`}
-          >
-            {cate}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {filteredProducts.slice(0, 10).map((product) => (
-          <div
-            key={product.id}
-            className="relative bg-white rounded-xl border-[1px] border-gray-300  hover:shadow-lg hover:cursor-pointer transition p-4 flex flex-col items-center text-center gap-2"
-          >
-            {product.isHot && (
-              <span className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-semibold px-2 py-[2px] rounded-full z-50">
-                Giá sốc
-              </span>
-            )}
-
-            <div className="w-full h-[163px] leading-[163px] mb-[10px] relative overflow-hidden">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="max-h-[95%] object-contain mt-2 mx-[4.275px] transition-all duration-300 ease-in-out hover:scale-105"
-              />
-
-              <img
-                src="https://cdn.tgdd.vn/2023/10/campaign/label-dmx-200x200.png?v=2024"
-                alt="image"
-                className="w-10 h-10 absolute top-auto bottom-0 left-0 border-0 overflow-clip transition-all duration-300 ease-in-out hover:scale-105"
-              />
-            </div>
-
-            <h3 className="text-sm font-medium line-clamp-2 min-h-[40px] text-left hover:text-[#288ad6] text-[#1d2939] mb-[8px] leading-[21px] overflow-hidden text-ellipsis">
-              {product.name}
-            </h3>
-
-            <div className="mt-1 w-full flex flex-col items-start">
-              <p className="text-red-600 font-semibold text-[18px]">
-                {Math.round(
-                  product.price * (1 - product.discount / 100)
-                ).toLocaleString()}
-                ₫
-              </p>
-              <div className="w-full flex  items-center">
-                <p className="text-gray-400 text-sm line-through">
-                  {product.price.toLocaleString()}₫
-                </p>
-                <span className=" text-sm font-semibold text-red-500 ml-2">
-                  -{product.discount}%
-                </span>
-              </div>
-            </div>
-
-            <div className="w-full mt-2 flex items-center justify-start">
-              <Star className="w-5 h-5 text-yellow-400" />
-              <div className="w-fit pr-[3px] ">
-                <span className="ml-1 text-[12px] text-[#667085]">5</span>
-              </div>
-              <span className="ml-1 text-[12px] text-[#667085]">
-                • Đã bán 7,2k
-              </span>
+      <div className="w-full bg-white py-4 md:rounded-[12px] shadow-sm">
+        {cateLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="w-full overflow-x-auto scrollbar-hide pb-2 mb-3">
+            <div className="flex gap-3 px-4">
+              {categories?.slice(0, 9).map((cate) => (
+                <button
+                  key={cate.slug}
+                  onClick={() => setActiveCate(cate.slug)}
+                  className={`hover:cursor-pointer flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium border transition ${
+                    activeCate === cate.slug
+                      ? "bg-[#0056a6] text-white border-[#0056a6]"
+                      : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                  }`}
+                >
+                  {cate.name}
+                </button>
+              ))}
             </div>
           </div>
-        ))}
+        )}
+
+        {proLoading ? (
+          <span>Loading</span>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 mt-4 px-2 md:px-5 pb-[5px]">
+            {products?.slice(0, 12).map((product) => (
+              <div
+                key={product.id}
+                onClick={() =>
+                  router.push(`/${product.category}/${product.id}`)
+                }
+                className="relative bg-white rounded-[6px] border-[1px] border-[#f2f4f7] hover:shadow-lg hover:cursor-pointer transition p-2 flex flex-col items-center text-center"
+              >
+                <div className="w-full h-auto aspect-square mb-2 relative overflow-hidden flex items-center justify-center">
+                  <img
+                    src={product.images[0]}
+                    alt={product.title}
+                    className="max-h-full max-w-full object-contain transition-all duration-300 ease-in-out hover:scale-105"
+                  />
+                </div>
+
+                <div className="flex flex-col items-start w-full mt-auto">
+                  <h3 className="text-sm font-medium line-clamp-2 min-h-[40px] text-left text-[#1d2939] leading-tight mb-2">
+                    {product.title}
+                  </h3>
+
+                  <div className="w-full flex flex-col items-start mb-2">
+                    <p className="text-red-600 font-semibold text-base md:text-lg">
+                      {Math.round(
+                        product.price * (100 - product.discountPercentage)
+                      ).toLocaleString()}
+                      ₫
+                    </p>
+                    <div className="w-full flex items-center">
+                      <p className="text-gray-400 text-xs line-through">
+                        {product.price.toLocaleString()}₫
+                      </p>
+                      <span className="text-sm font-semibold text-red-500 ml-2">
+                        -{product.discountPercentage}%
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="bg-[#efefef] text-center text-black text-[12px] py-[3px] px-2.5 rounded-[25px] w-full">
+                    Sắp mở bán
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

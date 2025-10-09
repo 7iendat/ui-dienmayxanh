@@ -20,21 +20,21 @@ const fakeNews = [
       {
         id: 12,
         title:
-          "Săn 5.000 suất Phiếu mua hàng 500.000đ mua Tủ lạnh/Tủ đông/Tủ mát trên 500 lít",
+          "Nồi chiên giòn rụm - Deal ngon sắm liền tại Điện máy XANH: Giá từ 1.19 triệu, quà tặng & giảm giá khủng!",
         image:
-          "https://cdnv2.tgdd.vn/mwg-static/dmx/News/Thumb/1578040/Frame%202117129106638949265961422349.jpg",
+          "	https://cdnv2.tgdd.vn/mwg-static/dmx/News/Thumb/15…-sam-lien-tai-dien-may-xanh638925858918760125.jpg",
       },
       {
         id: 13,
         title:
-          "Săn 5.000 suất Phiếu mua hàng 500.000đ mua Tủ lạnh/Tủ đông/Tủ mát trên 500 lít",
+          "Tháng Panasonic: Sắm máy giặt đặc quyền giá tốt chỉ từ 10 triệu, tặng quà gia dụng, trúng iPhone 17 mỗi ngày!",
         image:
-          "https://cdnv2.tgdd.vn/mwg-static/dmx/News/Thumb/1578040/Frame%202117129106638949265961422349.jpg",
+          "https://cdnv2.tgdd.vn/mwg-static/dmx/News/Thumb/15…a-tot-trung-iphone-17-thumb638949080211909746.jpg",
       },
       {
         id: 14,
         title:
-          "Săn 5.000 suất Phiếu mua hàng 500.000đ mua Tủ lạnh/Tủ đông/Tủ mát trên 500 lít",
+          "THÁNG CỦA NÀNG - DEAL NGẬP TRÀN  LỊCH SALE THÁNG 10 - DEAL HOT KHẮP SÀN",
         image:
           "https://cdnv2.tgdd.vn/mwg-static/dmx/News/Thumb/1578040/Frame%202117129106638949265961422349.jpg",
       },
@@ -87,8 +87,8 @@ const HotNews = () => {
   });
 
   return (
-    <section className="w-full rounded-[12px] p-5 max-w-[1280px] bg-white my-5">
-      <h3 className="text-[#1d2939] mb-[20px] text-[24px] font-bold">
+    <section className="w-full rounded-[12px] p-2.5 md:p-5 max-w-[1280px] bg-white my-5">
+      <h3 className="text-[#1d2939] md:mb-[20px] text-[18px] md:text-[24px] font-bold">
         #CHỦ ĐỀ
       </h3>
 

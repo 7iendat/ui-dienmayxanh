@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CopyrightSesion from "@/components/CopyrightSesion";
+import Providers from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,20 +31,24 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen w-full overflow-x-hidden `}
       >
-        {/* Header */}
-        <header className="w-full">
-          <Header />
-        </header>
+        <Providers>
+          {/* Header */}
+          <header className="w-full">
+            <Header />
+          </header>
 
-        {/* Main Content */}
-        <main className="w-full flex justify-center">
-          <div className="w-full md:max-w-7xl sm:px-6 lg:px-8">{children}</div>
-        </main>
+          {/* Main Content */}
+          <main className="w-full flex justify-center">
+            <div className="w-full md:max-w-7xl sm:px-6 lg:px-8">
+              {children}
+            </div>
+          </main>
 
-        <footer className="w-full flex flex-col">
-          <Footer />
-          <CopyrightSesion />
-        </footer>
+          <footer className="w-full flex flex-col">
+            <Footer />
+            <CopyrightSesion />
+          </footer>
+        </Providers>
       </body>
     </html>
   );

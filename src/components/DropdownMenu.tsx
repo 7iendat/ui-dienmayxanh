@@ -1,13 +1,13 @@
 "use client";
 
 import { categories } from "@/data/data-fake";
-import Image from "next/image";
+
 import React, { useState } from "react";
 
 const DropdownMenu = () => {
   const [active, setActive] = useState(0);
   return (
-    <div className="w-xl bg-white absolute top-[calc(100%+14px)] left-0 rounded-md shadow-md text-gray-600 px-6 py-4 flex z-50">
+    <div className="w-xl bg-white absolute top-[calc(100%+10px)] left-0 rounded-md shadow-md text-gray-600  flex z-50">
       <div className="w-48 border-r bg-gray-50">
         {categories.map((cat, idx) => (
           <div

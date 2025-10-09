@@ -4,7 +4,7 @@ import React from "react";
 const BannerBrand = () => {
   return (
     <section className="w-full my-5">
-      <div className="text-[#1d2939] text-[24px] leading-8 font-bold">
+      <div className="text-[#1d2939] text-[18px] md:text-[24px] leading-8 font-bold mx-2.5 my-2.5">
         TUẦN LỄ THƯƠNG HIỆU
       </div>
 
@@ -25,7 +25,7 @@ const BannerBrand = () => {
           <img
             src="https://cdnv2.tgdd.vn/mwg-static/dmx/Banner/3c/5c/3c5c8ba7651a913671da7ce3eafc2435.png"
             alt="brand"
-            className="w-[95%] overflow-clip mr-[3px]"
+            className="w-[94%] overflow-clip ml-[3%]"
           />
         </Link>
       </div>
