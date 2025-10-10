@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ArrowDownIcon, ChevronDown, Star } from "lucide-react";
 import React from "react";
 import ProductCard from "./ProductCard";
+import RecomentProductSkeleton from "./skeleton/RecomentProductSkeleton";
 
 const RecommendedSection = () => {
   const { data, isLoading, isError } = useQuery({
@@ -22,7 +23,7 @@ const RecommendedSection = () => {
       </h3>
 
       {isLoading ? (
-        <span>Loading</span>
+        <RecomentProductSkeleton />
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-[8px] md:gap-[10px] w-full md:px-5 px-2.5 pb-[15px]">
           {data?.slice(0, 12).map((product, i) => (

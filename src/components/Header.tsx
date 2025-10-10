@@ -144,22 +144,28 @@ const HeaderMenu = () => {
     queryFn: getAllCategory,
   });
 
-  if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error...</p>;
 
   return (
     <div className="hidden md:block w-full bg-[#eaecf0] h-[32px] text-center">
       <div className="max-w-7xl mx-auto h-full px-4">
         <ul className="flex flex-nowrap h-full justify-center items-center">
-          {data?.slice(0, 10).map((d, i) => (
-            <Link
-              key={i}
-              href={"/"}
-              className="text-sm text-[#0567da] transition px-[10px] leading-4"
-            >
-              {d.name}
-            </Link>
-          ))}
+          {isLoading
+            ? Array.from({ length: 10 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-4 w-16 bg-gray-300 rounded mx-[10px] animate-pulse"
+                />
+              ))
+            : data?.slice(0, 10).map((d, i) => (
+                <Link
+                  key={i}
+                  href={"/"}
+                  className="text-sm text-[#0567da] transition px-[10px] leading-4"
+                >
+                  {d.name}
+                </Link>
+              ))}
         </ul>
       </div>
     </div>

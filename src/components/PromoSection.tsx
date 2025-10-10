@@ -3,6 +3,9 @@ import { getAllCategory, getProductByCategories } from "@/api/categoryApi";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import PromoProductCard from "./PromoProductCard";
+import PromoProductSkeleton from "./skeleton/PromoProductSkeleton";
+import CategoriesSkeleton from "./skeleton/CategoriesSkeleton";
 
 export default function PromoSection() {
   const [activeCate, setActiveCate] = useState("");
@@ -43,7 +46,12 @@ export default function PromoSection() {
 
       <div className="w-full bg-white py-4 md:rounded-[12px] shadow-sm">
         {cateLoading ? (
-          <p>Loading...</p>
+          Array.from({ length: 9 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-4 w-16 bg-gray-300 rounded mx-[10px] animate-pulse "
+            />
+          ))
         ) : (
           <div className="w-full overflow-x-auto scrollbar-hide pb-2 mb-3">
             <div className="flex gap-3 px-4">
@@ -65,52 +73,11 @@ export default function PromoSection() {
         )}
 
         {proLoading ? (
-          <span>Loading</span>
+          <PromoProductSkeleton />
         ) : (
           <div className="grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4 mt-4 px-2 md:px-5 pb-[5px]">
             {products?.slice(0, 12).map((product) => (
-              <div
-                key={product.id}
-                onClick={() =>
-                  router.push(`/${product.category}/${product.id}`)
-                }
-                className="relative bg-white rounded-[6px] border-[1px] border-[#f2f4f7] hover:shadow-lg hover:cursor-pointer transition p-2 flex flex-col items-center text-center"
-              >
-                <div className="w-full h-auto aspect-square mb-2 relative overflow-hidden flex items-center justify-center">
-                  <img
-                    src={product.images[0]}
-                    alt={product.title}
-                    className="max-h-full max-w-full object-contain transition-all duration-300 ease-in-out hover:scale-105"
-                  />
-                </div>
-
-                <div className="flex flex-col items-start w-full mt-auto">
-                  <h3 className="text-sm font-medium line-clamp-2 min-h-[40px] text-left text-[#1d2939] leading-tight mb-2">
-                    {product.title}
-                  </h3>
-
-                  <div className="w-full flex flex-col items-start mb-2">
-                    <p className="text-red-600 font-semibold text-base md:text-lg">
-                      {Math.round(
-                        product.price * (100 - product.discountPercentage)
-                      ).toLocaleString()}
-                      ₫
-                    </p>
-                    <div className="w-full flex items-center">
-                      <p className="text-gray-400 text-xs line-through">
-                        {product.price.toLocaleString()}₫
-                      </p>
-                      <span className="text-sm font-semibold text-red-500 ml-2">
-                        -{product.discountPercentage}%
-                      </span>
-                    </div>
-                  </div>
-
-                  <span className="bg-[#efefef] text-center text-black text-[12px] py-[3px] px-2.5 rounded-[25px] w-full">
-                    Sắp mở bán
-                  </span>
-                </div>
-              </div>
+              <PromoProductCard product={product} />
             ))}
           </div>
         )}
